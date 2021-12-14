@@ -12,6 +12,7 @@ const option1 = document.querySelector('.option1'),
     answersTracker = document.getElementById('answers-tracker'),
     btnNext = document.getElementById('btn-next'),
     btnTryAgain = document.getElementById('btn-try-again'),
+    titleModal = document.getElementById('quiz-over-modal-title'),
     correctAnswer = document.getElementById('correct-answer');
 
 let indexOfQuestion,
@@ -110,16 +111,27 @@ const validate = () => {
         randomQuestion();
         enableOption();
     }
-};
+}; 
 
 const quizOver = () => {
     document.querySelector('.quiz-over-modal').classList.add('active');
     correctAnswer.innerHTML = score;
     numberOfAllQuestions2.innerHTML = questions.length;
+    modalTitle();
 };
 
 const tryAgain = () => {
     window.location.reload();
+};
+
+const modalTitle = () => {
+    if (score <= 3) {
+        titleModal.innerHTML = 'Плохой результат!';
+    } else if (score <= 5) {
+        titleModal.innerHTML = 'Хороший результат!';
+    } else {
+        titleModal.innerHTML = 'Супер результат!';
+    }
 };
 
 btnTryAgain.addEventListener('click', tryAgain);
